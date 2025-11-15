@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt Generator</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  label {
+    display: block;
+    margin-top: 10px;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 5px;
+    margin-top: 3px;
+  }
+  button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    font-size: 16px;
+  }
+  p#output {
+    margin-top: 20px;
+    white-space: pre-line;
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+<h2>Custom Prompt Generator</h2>
+
+<form id="promptForm">
+  <label>Role/Persona:
+    <input type="text" id="role" value="My LinkedIn Post writer" required>
+  </label>
+  
+  <label>Objective / Output For:
+    <input type="text" id="objective" value="To grow my followers in LinkedIn help engineering & leaders clearly understand AI concepts I am a Senior Engineering Manager explaining complex platform systems to engineering leaders and product teams." required>
+  </label>
+
+  <label>Writing Style (Tone, voice, sentence length, examples):
+    <input type="text" id="style" value="Punchy, explanatory, mid-length sentences with real product examples. Prefer simple language that makes complex systems intuitive." required>
+  </label>
+
+  <label>Format (Sections, bullets, tables, examples, analogies):
+    <input type="text" id="format" value="Sections with arrows (→) explaining step-by-step flow; bullets for clarity; end with a one-line result summary." required>
+  </label>
+
+  <label>Content Requirement Point 1:
+    <input type="text" id="point1" value="Explain what the AI concept is and why it matters." required>
+  </label>
+
+  <label>Content Requirement Point 2:
+    <input type="text" id="point2" value="Break down how it works (input → processing → output)." required>
+  </label>
+
+  <label>Content Requirement Point 3:
+    <input type="text" id="point3" value="Show where it can be applied in real products or engineering scenarios." required>
+  </label>
+
+  <label>Include (Context, examples, metaphors, use cases):
+    <input type="text" id="include" value="Real-world examples, metaphors, analogies, and practical use cases." required>
+  </label>
+
+  <label>Exclude (Jargon, fluff, repeated points):
+    <input type="text" id="exclude" value="Heavy mathematical details, dense research jargon, repeated or filler explanations." required>
+  </label>
+
+  <button type="submit">Generate Prompt</button>
+</form>
+
+<p id="output"></p>
+
+<script>
+document.getElementById('promptForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  const role = document.getElementById('role').value;
+  const objective = document.getElementById('objective').value;
+  const style = document.getElementById('style').value;
+  const format = document.getElementById('format').value;
+  const point1 = document.getElementById('point1').value;
+  const point2 = document.getElementById('point2').value;
+  const point3 = document.getElementById('point3').value;
+  const include = document.getElementById('include').value;
+  const exclude = document.getElementById('exclude').value;
+
+  const prompt = `You are a ${role}. Your goal: ${objective}.
+Constraints:
+- Writing style: ${style}
+- Format: ${format}
+Content requirements:
+1) ${point1}
+2) ${point2}
+3) ${point3}
+Include: ${include}
+Exclude: ${exclude}
+Before responding: Ask for the topic first and after i give you topic ask 3 clarifying questions if needed. Then produce the final output.`;
+
+  document.getElementById('output').textContent = prompt;
+});
+</script>
+
+</body>
+</html>
